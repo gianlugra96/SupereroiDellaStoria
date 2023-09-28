@@ -6,12 +6,23 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+    [Header("Loader")]
+    [Tooltip("Loader Scene")]
     public string loaderScene;
 
+    [Header("Music")]
+    [Tooltip("Music Value")]
     public TextMeshProUGUI musicValue;
+    [Tooltip("Music Mixer")]
     public AudioMixer musicMixer;
+    [Tooltip("Sounds Value")]
     public TextMeshProUGUI soundsValue;
+    [Tooltip("Sounds Mixer")]
     public AudioMixer soundsMixer;
+
+
+    [Header("Buttons")]
+    [Tooltip("Load Button")]
     public Button loadButton;
 
     private Animator animator;

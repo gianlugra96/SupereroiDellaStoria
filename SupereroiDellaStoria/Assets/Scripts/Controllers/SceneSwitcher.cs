@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    [Header("Scene Switcher Manager")]
+
+    [Tooltip("Scene To Unload")]
     public string sceneToUnload;
+
+    [Tooltip("Loader Scene")]
     public string loaderScene;
+
+    [Tooltip("Scene To Load")]
     public string sceneToLoad;
     
     void Start()
