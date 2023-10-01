@@ -52,7 +52,8 @@ public class GameController : MonoBehaviour
         if (state == State.IDLE) {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                if (bottomBar.IsCompleted())
+                //PLAY NEXT SENTENCE
+                if (bottomBar.IsSentenceCompleted())
                 {
                     bottomBar.StopTyping();
                     if (bottomBar.IsLastSentence())
@@ -62,17 +63,17 @@ public class GameController : MonoBehaviour
                     else
                     {
                         bottomBar.PlayNextSentence();
-                        PlayAudio((currentScene as StoryScene)
-                            .sentences[bottomBar.GetSentenceIndex()]);
+                        PlayAudio((currentScene as StoryScene).sentences[bottomBar.GetSentenceIndex()]);
                     }
                 }
                 else
                 {
-                    bottomBar.SpeedUp();
+                    bottomBar.SpeedUpTyping();
                 }
             }
             if (Input.GetMouseButtonDown(1))
             {
+                //PLAY PREVIOUS SENTENCE
                 if (bottomBar.IsFirstSentence())
                 {
                     if(history.Count > 1)
@@ -87,9 +88,10 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    bottomBar.GoBack();
+                    bottomBar.PlayPreviousSentence();
                 }
             }
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 List<int> historyIndicies = new List<int>();
@@ -131,14 +133,14 @@ public class GameController : MonoBehaviour
             {
                 backgroundController.SwitchImage(storyScene.background);
                 yield return new WaitForSeconds(1f);
-                bottomBar.ClearText();
+                bottomBar.ClearDialogueText();
                 bottomBar.Show();
                 yield return new WaitForSeconds(1f);
             }
             else
             {
                 backgroundController.SetImage(storyScene.background);
-                bottomBar.ClearText();
+                bottomBar.ClearDialogueText();
             }
             bottomBar.PlayScene(storyScene, sentenceIndex, isAnimated);
             state = State.IDLE;

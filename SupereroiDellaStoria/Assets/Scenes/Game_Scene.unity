@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 448073288}
   m_Layer: 5
-  m_Name: CharacterNameContainer
+  m_Name: SpeakerNameContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barText: {fileID: 1578685901}
-  personNameText: {fileID: 2104872032}
+  speakerNameText: {fileID: 2104872032}
+  speakerIconNameImage: {fileID: 654614356}
+  speakerImage: {fileID: 1218265011}
   voicePlayer: {fileID: 894277468}
   spritesPrefab: {fileID: 942406339}
 --- !u!114 &455100602
@@ -508,7 +510,7 @@ GameObject:
   - component: {fileID: 654614357}
   - component: {fileID: 654614356}
   m_Layer: 5
-  m_Name: CharacterIconImage
+  m_Name: SpeakerIconImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -897,7 +899,7 @@ GameObject:
   - component: {fileID: 1218265012}
   - component: {fileID: 1218265011}
   m_Layer: 5
-  m_Name: CharacterImage
+  m_Name: SpeakerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1833,7 +1835,7 @@ GameObject:
   - component: {fileID: 2104872033}
   - component: {fileID: 2104872032}
   m_Layer: 5
-  m_Name: CharacterNameText
+  m_Name: SpeakerNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
