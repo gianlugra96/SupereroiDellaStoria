@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpriteController : MonoBehaviour
+public class SpriteActionController : MonoBehaviour
 {
     private SpriteSwitcher switcher;
     private Animator animator;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
+    private Coroutine m_moveCoroutine;
 
     private void Awake()
     {
@@ -55,12 +56,20 @@ public class SpriteController : MonoBehaviour
     {
         if (isAnimated)
         {
-            StartCoroutine(MoveCoroutine(coords, speed));
+            StartMove(coords, speed);
         }
         else
         {
             rect.localPosition = coords;
         }
+    }
+    private void StartMove(Vector2 coords, float speed)
+    {
+        if (m_moveCoroutine != null)
+        {
+            StopCoroutine(m_moveCoroutine);
+        }
+        m_moveCoroutine = StartCoroutine(MoveCoroutine(coords, speed));
     }
 
     private IEnumerator MoveCoroutine(Vector2 coords, float speed)

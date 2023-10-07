@@ -15,13 +15,14 @@ public class StoryScene : GameScene
         public string text;
         public AudioClip audio;
         public Speaker speaker;
-        public List<Action> actions;
+        public List<SpriteAction> spriteActions;
+        public List<CameraAction> cameraActions;
 
         public AudioClip music;
         public AudioClip sound;
 
         [System.Serializable]
-        public struct Action
+        public struct SpriteAction
         {
             public Speaker speaker;
             public int spriteIndex;
@@ -33,6 +34,21 @@ public class StoryScene : GameScene
             public enum Type
             {
                 NONE, APPEAR, MOVE, DISAPPEAR
+            }
+        }
+
+        [System.Serializable]
+        public struct CameraAction
+        {
+            public Zoom zoom;
+            public float zoomSpeed;
+            public Vector2 moveCoords;
+            public float moveSpeed;
+
+            [System.Serializable]
+            public enum Zoom
+            {
+                x1, x2, x4, x8, x16
             }
         }
     }

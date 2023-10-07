@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using static StoryScene.Sentence;
 
 public class BottomBarController : MonoBehaviour
 {
     public TextMeshProUGUI barText;
     public TextMeshProUGUI speakerNameText;
     public Image speakerIconNameImage;
-    public Image speakerImage;
+    public Image speakerDialogueImage;
     public AudioSource voicePlayer;
 
     private int sentenceIndex = -1;
@@ -18,9 +19,10 @@ public class BottomBarController : MonoBehaviour
     private Animator animator;
     private bool isHidden = false;
 
-    public Dictionary<Speaker, SpriteController> sprites;
+    public Dictionary<Speaker, SpriteActionController> spritesAction;
     public GameObject spritesPrefab;
 
+    private CameraActionController cameraActionController;
     private Coroutine typingCoroutine;
     private float speedFactor = 1f;
 
@@ -32,12 +34,14 @@ public class BottomBarController : MonoBehaviour
     private StoryScene CurrentScene => currentScene;
     private StoryScene.Sentence CurrentSentence => CurrentScene.sentences[sentenceIndex];
     private Speaker CurrentSentenceSpeaker => CurrentSentence.speaker;
-    private List<StoryScene.Sentence.Action> CurrentSentenceActions => CurrentSentence.actions;
+    private List<StoryScene.Sentence.SpriteAction> CurrentSentenceSpriteActions => CurrentSentence.spriteActions;
+    private List<StoryScene.Sentence.CameraAction> CurrentSentenceCameraActions => CurrentSentence.cameraActions;
 
     private void Start()
     {
-        sprites = new Dictionary<Speaker, SpriteController>();
+        spritesAction = new Dictionary<Speaker, SpriteActionController>();
         animator = GetComponent<Animator>();
+        cameraActionController = Camera.main.GetComponent<CameraActionController>();
     }
 
     #region SCENE MANAGER
@@ -113,6 +117,7 @@ public class BottomBarController : MonoBehaviour
 
     public void InitializeDialogueText()
     {
+        //Initialize speaker Icon Name
         if(CurrentSentenceSpeaker.speakerIconNameSprite != null)
         {
             speakerIconNameImage.gameObject.SetActive(true);
@@ -123,6 +128,17 @@ public class BottomBarController : MonoBehaviour
             speakerIconNameImage.gameObject.SetActive(false);
         }
 
+        //Initialize speaker Dialogue Image
+        if(CurrentSentenceSpeaker.speakerDialogueSprite != null)
+        {
+            speakerDialogueImage.gameObject.SetActive(true);
+            speakerDialogueImage.sprite = CurrentSentenceSpeaker.speakerDialogueSprite;
+        }
+        else
+        {
+            speakerDialogueImage.gameObject.SetActive(false);
+        }
+
         speakerNameText.text = CurrentSentenceSpeaker.speakerName;
         speakerNameText.color = CurrentSentenceSpeaker.textColor;
     }
@@ -130,6 +146,7 @@ public class BottomBarController : MonoBehaviour
     public void ClearDialogueText()
     {
         speakerIconNameImage.gameObject.SetActive(false);
+        speakerDialogueImage.gameObject.SetActive(false);
         barText.text = "";
         speakerNameText.text = "";
     }
@@ -168,42 +185,69 @@ public class BottomBarController : MonoBehaviour
 
     #region SPEAKERS/ACTIONS MANAGER
 
-    //Play all actions speaker
+    //Play all Sprite/Camera actions
     private void ActSpeakers(bool isAnimated = true)
     {
-        for (int i = 0; i < CurrentSentenceActions.Count; i++)
-        {
-            ActSpeaker(CurrentSentenceActions[i], isAnimated);
-        }
+        CurrentSentenceSpriteActions.ForEach(action => ActSpriteAction(action, isAnimated));
+        CurrentSentenceCameraActions.ForEach(action => ActCameraAction(action, isAnimated));
     }
 
-    private void ActSpeaker(StoryScene.Sentence.Action action, bool isAnimated = true)
+    private void ActSpriteAction(SpriteAction spriteAction, bool isAnimated = true)
     {
-        SpriteController spriteController;
-        if (!sprites.ContainsKey(action.speaker))
+        SpriteActionController spriteActionController;
+        if (!spritesAction.ContainsKey(spriteAction.speaker))
         {
-            spriteController = Instantiate(action.speaker.prefab.gameObject, spritesPrefab.transform).GetComponent<SpriteController>();
-            sprites.Add(action.speaker, spriteController);
+            spriteActionController = Instantiate(spriteAction.speaker.prefab.gameObject, spritesPrefab.transform).GetComponent<SpriteActionController>();
+            spritesAction.Add(spriteAction.speaker, spriteActionController);
         }
         else
         {
-            spriteController = sprites[action.speaker];
+            spriteActionController = spritesAction[spriteAction.speaker];
         }
 
-        switch (action.actionType)
+        //Sprite movement
+        switch (spriteAction.actionType)
         {
-            case StoryScene.Sentence.Action.Type.APPEAR:
-                spriteController.Setup(action.speaker.sprites[action.spriteIndex]);
-                spriteController.Show(action.coords, isAnimated);
+            case SpriteAction.Type.APPEAR:
+                spriteActionController.Setup(SpriteFromSpriteAction(spriteAction));
+                spriteActionController.Show(spriteAction.coords, isAnimated);
                 return;
-            case StoryScene.Sentence.Action.Type.MOVE:
-                spriteController.Move(action.coords, action.moveSpeed, isAnimated);
+            case SpriteAction.Type.MOVE:
+                spriteActionController.Move(spriteAction.coords, spriteAction.moveSpeed, isAnimated);
                 break;
-            case StoryScene.Sentence.Action.Type.DISAPPEAR:
-                spriteController.Hide(isAnimated);
+            case SpriteAction.Type.DISAPPEAR:
+                spriteActionController.Hide(isAnimated);
                 break;
         }
-        spriteController.SwitchSprite(action.speaker.sprites[action.spriteIndex], isAnimated);
+
+        //Change sprite
+        spriteActionController.SwitchSprite(SpriteFromSpriteAction(spriteAction), isAnimated);
+    }
+
+    private void ActCameraAction(CameraAction cameraAction, bool isAnimated = true)
+    {
+        cameraActionController.Move(-cameraAction.moveCoords, cameraAction.moveSpeed, isAnimated);
+        cameraActionController.Zoom(cameraAction.zoom, cameraAction.zoomSpeed, isAnimated);
+    }
+
+    private Sprite SpriteFromSpriteAction(SpriteAction spriteAction)
+    {
+        return spriteAction.speaker.sprites[spriteAction.spriteIndex];
+    }
+
+    public void ResetCamera()
+    {
+        cameraActionController.ResetMove();
+        cameraActionController.ResetZoom();
+    }
+
+    public void HideSprites()
+    {
+        while (spritesPrefab.transform.childCount > 0)
+        {
+            DestroyImmediate(spritesPrefab.transform.GetChild(0).gameObject);
+        }
+        spritesAction.Clear();
     }
 
     #endregion
@@ -223,15 +267,6 @@ public class BottomBarController : MonoBehaviour
     {
         animator.SetTrigger("Show");
         isHidden = false;
-    }
-
-    public void HideSprites()
-    {
-        while (spritesPrefab.transform.childCount > 0)
-        {
-            DestroyImmediate(spritesPrefab.transform.GetChild(0).gameObject);
-        }
-        sprites.Clear();
     }
 
     #endregion

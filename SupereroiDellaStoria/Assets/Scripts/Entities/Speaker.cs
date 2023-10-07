@@ -9,7 +9,7 @@ public class Speaker : ScriptableObject
     public Color textColor;
 
     public Sprite speakerIconNameSprite;
-    public Sprite speakerSprite;
+    public Sprite speakerDialogueSprite;
     public List<Sprite> sprites;
-    public SpriteController prefab;
+    public SpriteActionController prefab;
 }
