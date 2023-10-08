@@ -19,9 +19,14 @@ MonoBehaviour:
     spriteActions: []
     cameraActions:
     - zoom: 2
+      zoomPercentage: 0
       zoomSpeed: 0.1
+      move: 0
       moveCoords: {x: 0, y: 0}
       moveSpeed: 0
+      shake: 0
+      shakeMagnitude: 0
+      shakeDuration: 0
     music: {fileID: 0}
     sound: {fileID: 0}
   - text: ...
@@ -30,10 +35,15 @@ MonoBehaviour:
     spriteActions: []
     cameraActions:
     - zoom: 0
+      zoomPercentage: 0
       zoomSpeed: 0.2
+      move: 0
       moveCoords: {x: 0, y: 0}
       moveSpeed: 0
+      shake: 0
+      shakeMagnitude: 0
+      shakeDuration: 0
     music: {fileID: 0}
     sound: {fileID: 8300000, guid: cfc727c4485524842b984e5a1448b5b1, type: 3}
-  background: {fileID: 21300000, guid: 36ed1396f91603b41849758edf2b76c6, type: 3}
+  background: {fileID: 21300000, guid: ff518a8b460e28647adfa275295ad730, type: 3}
   nextScene: {fileID: 11400000, guid: 322cc1a5845dec844a3dab162f68e0ff, type: 2}

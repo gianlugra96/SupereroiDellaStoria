@@ -226,8 +226,9 @@ public class BottomBarController : MonoBehaviour
 
     private void ActCameraAction(CameraAction cameraAction, bool isAnimated = true)
     {
-        cameraActionController.Move(-cameraAction.moveCoords, cameraAction.moveSpeed, isAnimated);
-        cameraActionController.Zoom(cameraAction.zoom, cameraAction.zoomSpeed, isAnimated);
+        if (cameraAction.move) { cameraActionController.Move(-cameraAction.moveCoords, cameraAction.moveSpeed, isAnimated); }
+        if (cameraAction.zoom) { cameraActionController.Zoom(cameraAction.zoomPercentage, cameraAction.zoomSpeed, isAnimated); }
+        if (cameraAction.shake) { cameraActionController.Shake(cameraAction.shakeDuration, cameraAction.shakeMagnitude, isAnimated); }
     }
 
     private Sprite SpriteFromSpriteAction(SpriteAction spriteAction)

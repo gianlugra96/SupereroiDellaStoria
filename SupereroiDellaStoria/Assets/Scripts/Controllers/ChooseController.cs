@@ -11,6 +11,7 @@ public class ChooseController : MonoBehaviour
     private Animator animator;
     private float labelHeight = -1;
 
+    private List<GameObject> labelsGameObject = new();
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -24,6 +25,7 @@ public class ChooseController : MonoBehaviour
         for(int index = 0; index < scene.labels.Count; index++)
         {
             ChooseLabelController newLabel = Instantiate(label.gameObject, transform).GetComponent<ChooseLabelController>();
+            labelsGameObject.Add(newLabel.gameObject);
 
             if(labelHeight == -1)
             {
@@ -76,9 +78,6 @@ public class ChooseController : MonoBehaviour
 
     private void DestroyLabels()
     {
-        foreach(Transform childTransform in transform)
-        {
-            Destroy(childTransform.gameObject);
-        }
+        labelsGameObject.ForEach(l => Destroy(l));
     }
 }

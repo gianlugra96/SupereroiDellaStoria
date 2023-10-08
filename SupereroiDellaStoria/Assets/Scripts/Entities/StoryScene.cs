@@ -40,10 +40,20 @@ public class StoryScene : GameScene
         [System.Serializable]
         public struct CameraAction
         {
-            public Zoom zoom;
+            [Header("Zoom")]
+            public bool zoom;
+            public Zoom zoomPercentage;
             public float zoomSpeed;
+
+            [Header("Move")]
+            public bool move;
             public Vector2 moveCoords;
             public float moveSpeed;
+
+            [Header("Shake")]
+            public bool shake;
+            public float shakeMagnitude;
+            public float shakeDuration;
 
             [System.Serializable]
             public enum Zoom

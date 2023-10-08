@@ -24,9 +24,14 @@ MonoBehaviour:
       moveSpeed: 2
     cameraActions:
     - zoom: 1
+      zoomPercentage: 2
       zoomSpeed: 1
-      moveCoords: {x: -400, y: 0}
-      moveSpeed: 1
+      move: 0
+      moveCoords: {x: 0, y: 0}
+      moveSpeed: 0
+      shake: 0
+      shakeMagnitude: 0
+      shakeDuration: 0
     music: {fileID: 8300000, guid: c90bbda81fc61b64096dab173e188461, type: 3}
     sound: {fileID: 0}
   - text: ...
@@ -40,10 +45,15 @@ MonoBehaviour:
       moveSpeed: 2
     cameraActions:
     - zoom: 4
-      zoomSpeed: 2
-      moveCoords: {x: 500, y: 0}
-      moveSpeed: 2
+      zoomPercentage: 1
+      zoomSpeed: 1
+      move: 0
+      moveCoords: {x: 0, y: 0}
+      moveSpeed: 0
+      shake: 1
+      shakeMagnitude: 10
+      shakeDuration: 1
     music: {fileID: 8300000, guid: c90bbda81fc61b64096dab173e188461, type: 3}
     sound: {fileID: 0}
-  background: {fileID: 21300000, guid: fa238270389c60246a66b9da7631e9a6, type: 3}
+  background: {fileID: 21300000, guid: b8e112355c9162c458b47ddfc13c5251, type: 3}
   nextScene: {fileID: 11400000, guid: ec653d3b374221d408db5c177e47d902, type: 2}
