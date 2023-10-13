@@ -103,7 +103,7 @@ public class CameraActionController : MonoBehaviour
         while (backgroundRect.localPosition.x != coords.x || backgroundRect.localPosition.y != coords.y)
         {
             backgroundRect.localPosition = Vector2.MoveTowards(backgroundRect.localPosition, coords,
-                Time.deltaTime * 1000f * speed);
+                Time.deltaTime * 100f * speed);
             yield return null;
         }
     }
