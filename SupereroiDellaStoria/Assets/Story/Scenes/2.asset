@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fb4c6070f247e48b4377b5728b8182, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: ff518a8b460e28647adfa275295ad730, type: 3}
+  VFXEffect: {fileID: 7018805853691314924, guid: c92f784432ce0f142add9d93677403fc,
+    type: 3}
+  nextScene: {fileID: 11400000, guid: 322cc1a5845dec844a3dab162f68e0ff, type: 2}
   sentences:
   - text: Suddenly I woke up and decided to go for a walk
     audio: {fileID: 8300000, guid: b0bfca9991180db49bfecfd37d408c04, type: 3}
@@ -45,5 +49,3 @@ MonoBehaviour:
       shakeDuration: 0
     music: {fileID: 0}
     sound: {fileID: 8300000, guid: cfc727c4485524842b984e5a1448b5b1, type: 3}
-  background: {fileID: 21300000, guid: ff518a8b460e28647adfa275295ad730, type: 3}
-  nextScene: {fileID: 11400000, guid: 322cc1a5845dec844a3dab162f68e0ff, type: 2}

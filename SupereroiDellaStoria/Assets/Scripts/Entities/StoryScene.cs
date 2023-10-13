@@ -5,9 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class StoryScene : GameScene
 {
-    public List<Sentence> sentences;
     public Sprite background;
+    public GameObject VFXEffect;
     public GameScene nextScene;
+    public List<Sentence> sentences;
 
     [System.Serializable]
     public struct Sentence

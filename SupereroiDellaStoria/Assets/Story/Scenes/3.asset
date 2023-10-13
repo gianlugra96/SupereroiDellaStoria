@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fb4c6070f247e48b4377b5728b8182, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: ec7d2a778bd48234eb8cd3ac4a339ba3, type: 3}
+  VFXEffect: {fileID: 2470712618535648530, guid: f2d5aae3e6f3841419c335cc64576621,
+    type: 3}
+  nextScene: {fileID: 11400000, guid: e49ff8b3e9d38a644b6bb73e0ed39ffa, type: 2}
   sentences:
   - text: Okay...
     audio: {fileID: 8300000, guid: c1c8cae9967265f4ca924e4025a7c4d6, type: 3}
@@ -48,5 +52,3 @@ MonoBehaviour:
     cameraActions: []
     music: {fileID: 8300000, guid: b1a4b200ce662d048ae9541245ffc60e, type: 3}
     sound: {fileID: 0}
-  background: {fileID: 21300000, guid: ec7d2a778bd48234eb8cd3ac4a339ba3, type: 3}
-  nextScene: {fileID: 11400000, guid: e49ff8b3e9d38a644b6bb73e0ed39ffa, type: 2}

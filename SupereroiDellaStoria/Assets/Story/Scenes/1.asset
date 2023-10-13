@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fb4c6070f247e48b4377b5728b8182, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: b8e112355c9162c458b47ddfc13c5251, type: 3}
+  VFXEffect: {fileID: 1941509805517983018, guid: 68bb7f7a0360fe94dbfdb63b8eb534fd,
+    type: 3}
+  nextScene: {fileID: 11400000, guid: ec653d3b374221d408db5c177e47d902, type: 2}
   sentences:
   - text: Just another day in my room. Gonna sleep all day long...
     audio: {fileID: 8300000, guid: 686e7cadb8945d3488503354244d5f5d, type: 3}
@@ -55,5 +59,3 @@ MonoBehaviour:
       shakeDuration: 1
     music: {fileID: 8300000, guid: c90bbda81fc61b64096dab173e188461, type: 3}
     sound: {fileID: 0}
-  background: {fileID: 21300000, guid: b8e112355c9162c458b47ddfc13c5251, type: 3}
-  nextScene: {fileID: 11400000, guid: ec653d3b374221d408db5c177e47d902, type: 2}

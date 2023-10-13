@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpriteActionController : MonoBehaviour
 {
-    private SpriteSwitcher switcher;
+    private SpriteSwitcherController switcher;
     private Animator animator;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
@@ -11,7 +11,7 @@ public class SpriteActionController : MonoBehaviour
 
     private void Awake()
     {
-        switcher = GetComponent<SpriteSwitcher>();
+        switcher = GetComponent<SpriteSwitcherController>();
         animator = GetComponent<Animator>();
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
